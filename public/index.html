@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- <script src="./javascripts/jquery.js"></script> -->
+  <script src="./javascripts/handlebars.js"></script>
+  <script src="contact_manager.js"></script>
+  <link rel="stylesheet" href="contact.css"/>
+</head>
+<body>
+    <header>
+      <h1>Contact Manager</h1>
+      <p>Using Backbone.js, Localstorage, RequireJs, Handlebars</p>
+    </header>
+  <div class="display">
+    <div class="main">
+      <div class="contact-actions">
+        <div class="add-contact">
+          <button>Add Contact</button>
+        </div>
+
+        <div class="search">
+          <select class="tag-filters">
+          </select>
+          <input class="text" placeholder="search">
+        </div>
+      </div>
+
+      <ul class="contact-list"></ul>
+    </div>
+
+    <div class="no-contacts">
+      <p>There is no contacts</p>
+      <button>Add Contact</button>
+    </div>
+
+    <div class="no-contacts no-matches">
+      <p>There is no contacts that start with <bold id="search-text"></bold></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>developed by Devasaran.com & 239 listing real estate</p>
+  </footer>
+</body>
+
+<script id="contacts" type="text/x-handlebars">
+    {{#each contacts}}
+    <li data-id='{{id}}' data-full_name='{{full_name}}'
+        data-phone_number='{{phone_number}}' data-email = '{{email}}'
+        data-tags='{{tags}}'>
+
+      <h2>{{full_name}}</h2>
+      <p ><strong>Phone Number:</strong></p>
+      <p>{{phone_number}}
+      <p><strong>Email:</strong></p>
+      <p>{{email}}</p>
+      <p><strong>Tags:</strong></p>
+      <p>{{tags}}</p>
+
+      <button name="edit">Edit</button>
+      <button name="delete">Delete</button>
+    </li>
+    {{/each}}
+</script>
+
+<script id="form" type="text/x-handlebars">
+  <form action="{{path}}" data-method="{{method}}">
+    <h2>{{crud}} Contact</h2>
+
+    <div class='inputs'>
+      <label>Full name:</label><input name='full_name' pattern="[a-zA-Z]{2,} [A-Za-z]{2,}" oninvalid="setCustomValidity('Please enter a first and last name separated by a space')" oninput="setCustomValidity('')">
+      <label>Email address:</label><input name='email' pattern="[a-zA-Z0-9]+@[A-Za-z0-9]+[.]{1}[A-Za-z]+" oninvalid="setCustomValidity('Please Enter a Valid Email Address')" oninput="setCustomValidity('')">
+      <label>Telephone Number:</label><input name='phone_number' pattern="([.()-]*\d[.()-]*){9,}" oninvalid="setCustomValidity('Please enter a valid phone number')" oninput="setCustomValidity('')">
+
+      <label>Tags:</label><input name='tags' type='hidden'>
+      <div class='add-tag'>
+        <ul class='tag-list'>
+        </ul>
+        <input placeholder='Add tag'>
+        <a name='add'>+</a>
+        <span class='error'></span>
+      </div><br>
+
+      <button type="submit">Submit</button>
+      <button name='cancel'>Cancel</button>
+    </div>
+  </form>
+</script>
+
+<script id="tags" type="text/x-handlebars">
+    <option selected>All tags</option>
+    {{#each tags}}
+      <option>{{this}}</option>
+    {{/each}}
+</script>
+
+</html>

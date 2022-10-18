@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  text-shadow: 0 1px 0 rgb(0 0 0 / 10%);
+  background: #6f5499;
+  padding: 25px;
+  top: 0;
+  left: 0;
+}
+
+form {
+  display: none;
+}
